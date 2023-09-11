@@ -1,0 +1,56 @@
+import socket
+
+class Assignment2:
+    def __init__(self, year):
+        self.year = year
+
+    def tellAge(self, current_year): 
+        age = current_year - self.year
+        print(f'Your age is {age}')
+
+    def listAnniversaries(self):
+        current_year = 2023
+        anniversaries = [i for i in range(10, current_year - self.year + 1, 10)]
+        return anniversaries
+
+    def modifyYear(self, n):
+        year_str = str(self.year)
+        modify_year = year_str[:2] * n + year_str[::2] * n
+        return modify_year
+
+    @staticmethod
+    def checkGoodString(string):
+        if len(string) >= 9 and string[0].islower() and string.count(string[0]) == 1 and string.isalnum():
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def connectTcp(host, port):
+        try:
+            socket.create_connection((host, port))
+            return True
+        except:
+            return False
+
+
+a = Assignment2(1991)
+
+a.tellAge(2023)
+
+ret = a.listAnniversaries()
+print(ret)
+
+ret = a.modifyYear(5)
+print(ret)
+
+ret1 = Assignment2.checkGoodString("f1obar0more")
+ret2 = Assignment2.checkGoodString("foobar0more")
+print(ret1)
+print(ret2)
+
+retval = Assignment2.connectTcp("www.google.com", 80)
+if retval:
+    print("Connection established correctly")
+else:
+    print("Some error")
