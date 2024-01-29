@@ -9,21 +9,33 @@ class Assignment2:
         print(f'Your age is {age}')
 
     def listAnniversaries(self):
-        current_year = 2023
+        current_year = 2022
         anniversaries = [i for i in range(10, current_year - self.year + 1, 10)]
         return anniversaries
 
     def modifyYear(self, n):
-        year_str = str(self.year)
-        modify_year = year_str[:2] * n + year_str[::2] * n
-        return modify_year
+        yearStr = str(self.year)
+        modifiedStr = yearStr[:2] * n 
+        combinedNum = self.year * n 
+        combinedStr = str(combinedNum)
+        newStr = ""
+        for x in range(len(combinedStr)):
+            if x % 2 == 0:
+                newStr = newStr + combinedStr[x]
+        modifiedStr = modifiedStr + newStr
+        
+        return modifiedStr
 
+        
     @staticmethod
     def checkGoodString(string):
-        if len(string) >= 9 and string[0].islower() and string.count(string[0]) == 1 and string.isalnum():
-            return True
-        else:
-            return False
+        digits_count = sum(c.isdigit() for c in string)
+
+        return len(string) >= 9 and string[0].isalpha() and digits_count == 1
+
+        
+        
+    
 
     @staticmethod
     def connectTcp(host, port):
@@ -32,25 +44,3 @@ class Assignment2:
             return True
         except:
             return False
-
-
-a = Assignment2(1991)
-
-a.tellAge(2023)
-
-ret = a.listAnniversaries()
-print(ret)
-
-ret = a.modifyYear(5)
-print(ret)
-
-ret1 = Assignment2.checkGoodString("f1obar0more")
-ret2 = Assignment2.checkGoodString("foobar0more")
-print(ret1)
-print(ret2)
-
-retval = Assignment2.connectTcp("www.google.com", 80)
-if retval:
-    print("Connection established correctly")
-else:
-    print("Some error")
